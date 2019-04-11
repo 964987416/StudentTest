@@ -1,2 +1,2 @@
 # StudentTest
-Create for old brother graduate
+一个简单的学生信息管理系统 包含作业上传下载 课程管理 学生管理 教师管理
