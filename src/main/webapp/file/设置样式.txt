@@ -1,0 +1,14 @@
+ 	   Cell cell2=row.createCell(2);
+32         cell2.setCellValue("我的前景色与众不同");
+33         CellStyle cellStyle2=wb.createCellStyle();
+34         cellStyle2.setFillForegroundColor(IndexedColors.RED.getIndex()); // 前景色
+35         cellStyle2.setFillPattern(CellStyle.SOLID_FOREGROUND);  
+36         cell2.setCellStyle(cellStyle2);
+
+https://blog.csdn.net/spp_1987/article/details/13769043
+
+
+	  HSSFFont font=wb.createFont();
+????????? font.setColor(HSSFColor.BLACK.index);//HSSFColor.VIOLET.index?//字体颜色
+????????? font.setFontHeightInPoints((short)12);
+????????? font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);?????????//字体增粗

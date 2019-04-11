@@ -1,0 +1,20 @@
+(prompt"命令为:AM")
+	(defun C:am(/f ss l i SSarea totlen entlen
+								ename name obj text -S text-L insPto height
+								insPtt1 insPt2 text -1 text -2 *app * DOC *MSP
+
+(vl -load-com)
+(setq * APP(valx-get-acad-object))
+(setq * DOC (vla-get-acctiveDocument *App))
+(setq* MSP(vla-getModelspace *DOC))
+(initget 1 "1 2 3")
+(setq f (getkword "\n 请输入你要统计的<1>面积<2>长度<3>两者:"))
+
+(if
+	(and
+			(setq ss(ssget))
+			(setq inspt0 (getpoint "\n 请输入文字插入点"))
+			(seq height (getdist"\n 请输入文字高度："))
+	)
+
+	(

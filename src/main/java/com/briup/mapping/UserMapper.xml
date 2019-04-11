@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.Dao">
+	<!-- 用户mapper -->
+	<resultMap id="BaseResultMap" type="com.briup.bean.Person">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="isDelete" property="isDelete" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<sql id="PersonList">
+		id,name,code,type,isDelete,password
+	</sql>
+	<!-- 通过name以及type查找用户 -->
+	<select id="searchPerson" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="PersonList" />
+		from person
+		where name = #{userName,jdbcType=VARCHAR} or code = #{userName,jdbcType=VARCHAR}
+	</select>
+
+
+	<!-- 将学生插入person表 -->
+	<insert id="addPerson" parameterType="com.briup.bean.Person">
+		insert into person
+		(name,code,type,isDelete,password)
+		values
+		(#{name,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},#{isDelete,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR}
+		)
+	</insert>
+	<!-- 将人员从person表中删除 -->
+	<update id="deletePerson" parameterType="com.briup.bean.Person">
+		update person
+		set
+		isdelete = "0"
+		where code = #{code,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 修改密码 -->
+	<update id="updatePwd" parameterType="com.briup.bean.Person">
+		update person
+		set
+		password = #{1}
+		where name = #{0}
+	</update>
+	<!-- 学生mapper -->
+	<resultMap id="stuMap" type="com.briup.bean.Student">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="isDelete" property="isDelete" jdbcType="VARCHAR" />
+		<result column="courseCode" property="courseCode" jdbcType="VARCHAR" />
+		<result column="classname" property="classname" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="birthday" property="birthday" jdbcType="VARCHAR" />
+		<result column="note" property="note" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<sql id="StuList">
+		id,code,name,gender,isDelete,courseCode,classname,age,address,birthday,note
+	</sql>
+	<insert id="addStu" parameterType="com.briup.bean.Student">
+		insert into student
+		(code,name,gender,isDelete,courseCode,classname,age,address,birthday,note)
+		values
+		(#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},
+		#{gender,jdbcType=VARCHAR},#{isDelete,jdbcType=VARCHAR},#{courseCode,jdbcType=VARCHAR},
+		#{classname,jdbcType=VARCHAR},#{age,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{birthday,jdbcType=VARCHAR},
+		#{note,jdbcType=VARCHAR}
+		)
+	</insert>
+
+
+	<!--教师 mapper -->
+	<resultMap id="teacherMap" type="com.briup.bean.Teacher">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="course" property="course" jdbcType="VARCHAR" />
+		<result column="isDelete" property="isDelete" jdbcType="VARCHAR" />
+		<result column="age" property="age" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<sql id="TeacherList">
+		id,code,name,gender,isDelete,course,age
+	</sql>
+	<insert id="addTeacher" parameterType="com.briup.bean.Teacher">
+		insert into teacher
+		(code,name,gender,isDelete,course,age)
+		values
+		(#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},
+		#{gender,jdbcType=VARCHAR},#{isDelete,jdbcType=VARCHAR},#{course,jdbcType=VARCHAR},
+		#{age,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!--课程 mapper -->
+	<resultMap id="courseMap" type="com.briup.bean.Course">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="teachercode" property="teachercode" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="VARCHAR" />
+		<result column="isDelete" property="isDelete" jdbcType="VARCHAR" />
+
+	</resultMap>
+	<sql id="CourseList">
+		id,code,name,teachercode,isDelete,time
+	</sql>
+	<insert id="addCourse" parameterType="com.briup.bean.Course">
+		insert into course
+		(code,name,teachercode,isDelete,time)
+		values
+		(#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},
+		#{teachercode,jdbcType=VARCHAR},#{isDelete,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="deleteCourse" parameterType="com.briup.bean.Course">
+		update Course
+		set
+		isdelete = "0"
+		where name = #{name,jdbcType=INTEGER}
+	</update>
+
+
+	<!--作业mapper -->
+	<resultMap id="workMap" type="com.briup.bean.Work">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="question" property="question" jdbcType="VARCHAR" />
+		<result column="answer" property="answer" jdbcType="VARCHAR" />
+		<result column="coursename" property="coursename" jdbcType="VARCHAR" />
+		<result column="grade" property="grade" jdbcType="VARCHAR" />
+		<result column="stucode" property="stucode" jdbcType="VARCHAR" />
+		<result column="stuname" property="stuname" jdbcType="VARCHAR" />
+		<result column="classesname" property="classesname" jdbcType="VARCHAR" />
+		<result column="teachername" property="teachername" jdbcType="VARCHAR" />
+		<result column="note" property="note" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+	<sql id="WorkList">
+		id,question,answer,coursename,grade,stucode,stuname,classesname,teachername,note,type,time
+	</sql>
+
+	<!-- 添加作业 -->
+	<insert id="addWork" parameterType="com.briup.bean.Work">
+		insert into work
+		(coursename,classesname,question,teachername,time)
+		values
+		(#{coursename,jdbcType=VARCHAR},#{classesname,jdbcType=VARCHAR},
+		#{question,jdbcType=VARCHAR},#{teachername,jdbcType=VARCHAR},#{time,jdbcType=VARCHAR}
+		)
+	</insert>
+
+
+	<select id="beginExam" resultMap="workMap" parameterType="java.lang.String">
+		select
+		<include refid="WorkList" />
+		from work
+		where coursename = #{0} and classesname=#{1}
+	</select>
+
+	<!-- 查询分数 -->
+	<select id="selectPoint" resultMap="workMap" parameterType="com.briup.bean.Work">
+		select
+		<include refid="WorkList" />
+		from work
+		where coursename = #{0} and stuname = #{1}
+	</select>
+	<!-- 查询修改作业 -->
+	<select id="selectWork" resultMap="workMap" parameterType="com.briup.bean.Work">
+		select
+		<include refid="WorkList" />
+		from work
+		where classesname=#{0} and teachername=#{1} and time=#{2}
+	</select>
+
+	<update id="workCommit" parameterType="com.briup.bean.Work">
+		update Work
+		set
+		answer =
+		#{answer,jdbcType=VARCHAR},stuname=#{stuname,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 删除作业 -->
+	<delete id="deletetWork" parameterType="com.briup.bean.Work">
+		delete from Work
+
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 教师通过课程 学生 姓名 课程 时间 查询作业 -->
+	<select id="juggWork" resultMap="workMap" parameterType="com.briup.bean.Work">
+		select
+		<include refid="WorkList" />
+		from work
+		where coursename=#{0} and stuname=#{1} and time=#{2}
+	</select>
+	
+	<!-- 教师批改作业 -->
+	<update id="saveGrade" parameterType="com.briup.bean.Work">
+		update Work
+		set
+		note =#{1},grade=#{2}
+		where id = #{0}
+	</update>
+	
+	<!-- 教师通过 班级   课程 时间 查询作业 -->
+	<select id="juggWorkForclass" resultMap="workMap" parameterType="com.briup.bean.Work">
+		select
+		<include refid="WorkList" />
+		from work
+		where coursename=#{0} and classesname=#{1} and time=#{2}
+	</select>
+	<!-- 教师查询学生成绩 -->
+	<select id="teacherSelectPoint" resultMap="workMap" parameterType="com.briup.bean.Work">
+		select
+		<include refid="WorkList" />
+		from work
+		where coursename=#{0} and classesname=#{1}
+		order by time
+	</select>
+	
+	<!-- 教师查询个人期末成绩-->
+	<select id="teacherSelectPointone" resultMap="workMap" parameterType="com.briup.bean.Work">
+		select
+		<include refid="WorkList" />
+		from work
+		where coursename=#{0} and classesname=#{1} and stuname=#{2}
+	</select>
+	
+	<!-- 添加学生成绩 -->
+	 <insert id="addGrade" parameterType="com.briup.bean.Work">
+		insert into work
+		(coursename,classesname,stuname,grade)
+		values
+		(#{coursename,jdbcType=VARCHAR},#{classesname,jdbcType=VARCHAR},
+		#{stuname,jdbcType=VARCHAR},#{grade,jdbcType=VARCHAR}
+		)
+	</insert>
+
+</mapper>

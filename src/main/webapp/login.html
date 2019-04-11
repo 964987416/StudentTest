@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>课程作业管理系统</title>
+	<link rel="icon" type="image/x-icon" href="static/images/tubiao.jpg" />
+    <link rel="stylesheet" type="text/css" href="static/css/login.css"/>
+    
+<script src="static/js/angular.js"></script></head>
+
+<body>
+    <div id="login_frame" >
+
+        <p id="logo">
+                欢迎登录！
+        </p>
+
+
+        <form method="post" action="Login">
+            <p><label class="label_input">用户名</label><input type="text" name="userName" id="userName" class="text_field"/></p>
+            <p><label class="label_input">密码</label><input type="password" name="passWord" id="passWord" class="text_field"/></p>
+			<p><label class="label_input">登录身份</label>	<select class="text_field" name="userType">
+			<option value="1">学生</option>
+			<option value="2">教师</option>
+			<option value="3">管理员</option>
+		</select></p>
+            <div id="login_control">
+                <input  type="submit" id="btn_login" value="登录"/>&nbsp
+                <input  type="reset" id="btn_login1" value="重置"/>
+            </div>
+           
+        </form>
+    </div>
+	<div ng-app="myApp" ng-controller="myCtrl" id = "time">
+	
+		<h3 style="color:white" >{{time}}</h3>
+	</div>
+    <div id="footer">
+        <small>
+           课程作业管理系统 | Copyright © 2019 版权所有
+        </small>
+    </div>
+    
+    <script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope,$interval) {
+			//数字时钟
+			$interval(function() {
+				$scope.time = new Date().toLocaleTimeString();
+			}, 1000);
+		});
+	</script>
+</body>
+</html>

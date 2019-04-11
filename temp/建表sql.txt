@@ -1,0 +1,20 @@
+#用户关系表 
+ CREATE TABLE `student`.`person`( `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键', `code` VARCHAR(20) COMMENT '用户代码', `name` VARCHAR(20) COMMENT '用户姓名', `type` VARCHAR(5) COMMENT '类型', `isDelete` VARCHAR(5) COMMENT '是否有效', KEY(`id`) ); 
+  ALTER TABLE `student`.`person` ADD COLUMN `password` VARCHAR(20) NULL COMMENT '用户密码' AFTER `isDelete`; 
+
+#课程表
+CREATE TABLE `student`.`course`( `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键', `name` VARCHAR(20) COMMENT '课程名称', `code` VARCHAR(20) COMMENT '课程编码', `teahercode` VARCHAR(20) COMMENT '教师编码', `time` VARCHAR(50) COMMENT '开课时间', KEY(`id`) ); 
+ALTER TABLE `student`.`course` ADD COLUMN `isDelete` VARCHAR(5) NULL COMMENT '是否有效' AFTER `time`;
+
+#学生表
+CREATE TABLE `student`.`student`( `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键', `code` VARCHAR(20) COMMENT '学生编码', `name` VARCHAR(20) COMMENT '姓名', `gender` VARCHAR(20) COMMENT '性别', `courseCode` VARCHAR(50) COMMENT '所修课程', `isDelete` VARCHAR(5) COMMENT '是否有效', `classname` VARCHAR(20) COMMENT '班级', `age` VARCHAR(20) COMMENT '年龄', KEY(`id`) ); 
+
+ALTER TABLE `student`.`student` ADD COLUMN `address` VARCHAR(50) NULL COMMENT '籍贯' AFTER `age`, ADD COLUMN `birthday` VARCHAR(20) NULL COMMENT '生日' AFTER `address`, ADD COLUMN `note` VARCHAR(100) NULL COMMENT '备注' AFTER `birthday`; 
+
+
+#教师表
+ CREATE TABLE `student`.`teacher`( `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键', `code` VARCHAR(20) COMMENT '用户代码', `name` VARCHAR(20) COMMENT '姓名', `gender` VARCHAR(5) COMMENT '性别', `course` VARCHAR(50) COMMENT '课程代码', `isDelete` VARCHAR(5) COMMENT '是否有效', `age` VARCHAR(10) COMMENT '年龄', KEY(`id`) ); 
+
+#作业表
+ CREATE TABLE `student`.`work`( `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键', `question` VARCHAR(500) COMMENT '问题', `answer` VARCHAR(500) COMMENT '回答', `coursename` VARCHAR(50) COMMENT '课程名称', `grade` VARCHAR(20) COMMENT '成绩', `stucode` VARCHAR(20) COMMENT '学生代码', `stuname` VARCHAR(20) COMMENT '学生姓名', `classesname` VARCHAR(20) COMMENT '班级名称', `teachername` VARCHAR(20) COMMENT '教师名称', `note` VARCHAR(300) COMMENT '教师评语', `type` VARCHAR(2) COMMENT '作业类型1：选择2：判断3：简答', `time` VARCHAR(20) COMMENT '布置时间', KEY(`id`) ); 
+

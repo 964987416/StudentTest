@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/main/resources/jdbc.properties=UTF-8
+encoding//src/main/resources/log4j.properties=UTF-8
+encoding//src/main/webapp/file/telegram.txt=GBK
+encoding//src/main/webapp/file/test-\u738B\u5927\u9524.txt=UTF-8
